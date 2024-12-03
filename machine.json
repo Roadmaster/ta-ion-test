@@ -1,0 +1,51 @@
+{
+  "config": {
+    "image": "registry.fly.io/ta-ion:deployment-01JE7BABX8NYAHZYCDRYF67A6T",
+    "env": {
+      "FLY_PROCESS_GROUP": "app",
+      "PRIMARY_REGION": "iad"
+    },
+    "init": {},
+    "guest": {
+      "cpu_kind": "shared",
+      "cpus": 1,
+      "memory_mb": 256
+    },
+    "metadata": {
+      "fly_platform_version": "v2",
+      "fly_process_group": "app"
+    },
+    "services": [
+      {
+        "protocol": "tcp",
+        "internal_port": 8080,
+        "ports": [
+          {
+            "port": 80,
+            "handlers": [
+              "http"
+            ]
+          }
+        ]
+      },
+      {
+        "protocol": "tcp",
+        "internal_port": 8443,
+        "ports": [
+          {
+            "port": 443,
+            "handlers": [
+              "http",
+              "tls"
+            ]
+          }
+        ],
+        "force_instance_key": null
+      }
+    ],
+    "restart": {
+      "policy": "on-failure",
+      "max_retries": 10
+    }
+  }
+}
